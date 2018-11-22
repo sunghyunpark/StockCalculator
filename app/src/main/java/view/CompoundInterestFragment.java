@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.investmentkorea.android.stockcalculator.R;
 
+import java.text.DecimalFormat;
+
 import base.BaseFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -109,6 +111,20 @@ public class CompoundInterestFragment extends BaseFragment {
         return (long) (principal * rateAndPeriod);
     }
 
+    /*
+    * 수익률 = ((최종원금 - 원금) / 원금) * 100
+    * result = ((An - A) / A) * 100
+    *
+     */
+    private double getYearOrMonthRate(long resultOfPrincipal, long principal, int period){
+        DecimalFormat form = new DecimalFormat("#.#");
+        if(period == 0){
+            return 0.0;
+        }else{
+            return Double.parseDouble(form.format(((resultOfPrincipal - principal) / (double)principal) * 100.0));
+        }
+    }
+
     @OnClick({R.id.year_month_select_tv, R.id.result_btn}) void Click(View v){
         switch (v.getId()){
             case R.id.year_month_select_tv:
@@ -139,15 +155,9 @@ public class CompoundInterestFragment extends BaseFragment {
                     compoundInterestModel.setNo(i);
                     compoundInterestModel.setSum(principal);
                     compoundInterestModel.setRate(rate);
-                    if(i==0){
-                        yearOrMonthRate = 0.0;
-                    }else{
-                        yearOrMonthRate = ((getPrincipal(principal,rate, i) - principal) / 100);
-                    }
-                    Log.d("fda", "차수 : "+i+"\n원금 : "+getPrincipal(principal, rate, i) + "\n수익률 : "+yearOrMonthRate );
+                    yearOrMonthRate = getYearOrMonthRate(getPrincipal(principal,rate, i), principal, i);
+                    Log.d("calculateResult", "\n차수 : "+i+"\n원금 : "+principal+"\n최종원금 : "+getPrincipal(principal, rate, i) + "\n수익률 : "+yearOrMonthRate );
                 }
-
-                showMessage("원금 : "+principal+"\n수익 : "+rate + "\n차수 : "+period+"\n최종원금 : "+getPrincipal(principal, rate, period));
                 break;
         }
     }
