@@ -5,31 +5,32 @@ package model;
 *
  */
 public class CompoundInterestModel {
-    private int no;    // 회차
-    private long sum;    // 원금
-    private double rate;    // 수익률
+    private String no;    // 회차
+    private String sum;    // 원금
+    private String rate;    // 수익률
 
-    public int getNo() {
+    public String getNo() {
         return no;
     }
 
-    public void setNo(int no) {
+    public void setNo(String no) {
         this.no = no;
     }
 
-    public long getSum() {
+    public String getSum() {
         return sum;
     }
 
-    public void setSum(long sum) {
+    public void setSum(String sum) {
         this.sum = sum;
     }
 
-    public double getRate() {
+    public String getRate() {
         return rate;
     }
 
-    public void setRate(double rate) {
+    public void setRate(String rate) {
         this.rate = rate;
     }
+
 }

@@ -6,180 +6,201 @@
     android:background="@color/colorWhite"
     tools:context="view.CompoundInterestFragment">
 
-    <LinearLayout
+    <android.support.v4.widget.NestedScrollView
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:textColor="@color/colorBlack"
-            android:gravity="center_vertical"
-            android:layout_weight="1"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:text="원금이"/>
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:layout_marginTop="3dp">
-
-            <EditText
-                android:id="@+id/principal_edit_box"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:maxLines="1"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp"
-                android:gravity="right|center_vertical"
-                android:textSize="20dp"
-                android:inputType="number"
-                android:textColor="@color/colorBlack"
-                android:background="@drawable/editbox_shape_gray"
-                android:layout_weight="2"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20dp"
-                android:layout_marginLeft="3dp"
-                android:textColor="@color/colorBlack"
-                android:textStyle="bold"
-                android:gravity="center_vertical"
-                android:layout_weight="8"
-                android:text="원일 때"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:layout_marginTop="6dp">
-
-            <TextView
-                android:id="@+id/year_month_select_tv"
-                android:layout_width="60dp"
-                android:layout_height="match_parent"
-                android:textSize="20dp"
-                android:gravity="center_vertical|center_horizontal"
-                android:maxLines="1"
-                android:textColor="@color/colorBlack"
-                android:text="연"
-                android:textStyle="bold"
-                android:background="@drawable/editbox_shape_gray"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textSize="20dp"
-                android:layout_marginLeft="6dp"
-                android:textColor="@color/colorBlack"
-                android:textStyle="bold"
-                android:gravity="center_vertical"
-                android:text="복리로"/>
-
-            <EditText
-                android:id="@+id/rate_edit_box"
-                android:layout_width="60dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="6dp"
-                android:textSize="20dp"
-                android:inputType="number"
-                android:gravity="center_vertical|center_horizontal"
-                android:maxLines="1"
-                android:textColor="@color/colorBlack"
-                android:background="@drawable/editbox_shape_gray" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textSize="20dp"
-                android:layout_marginLeft="6dp"
-                android:textColor="@color/colorBlack"
-                android:textStyle="bold"
-                android:gravity="center_vertical"
-                android:text="%의 수익을 내면"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:layout_marginTop="6dp">
-
-            <EditText
-                android:id="@+id/no_edit_box"
-                android:layout_width="60dp"
-                android:layout_height="match_parent"
-                android:textColor="@color/colorBlack"
-                android:textSize="20dp"
-                android:gravity="center_vertical|center_horizontal"
-                android:inputType="number"
-                android:maxLines="1"
-                android:background="@drawable/editbox_shape_gray"/>
-
-            <TextView
-                android:id="@+id/year_month_selected_tv"
-                android:layout_width="60dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="6dp"
-                android:textColor="@color/colorBlack"
-                android:textSize="20dp"
-                android:maxLines="1"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="년"
-                android:textStyle="bold"
-                android:background="@drawable/editbox_shape_gray" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textSize="20dp"
-                android:layout_marginLeft="6dp"
-                android:textColor="@color/colorBlack"
-                android:textStyle="bold"
-                android:gravity="center_vertical"
-                android:text="후 까지의 "/>
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:textColor="@color/colorBlack"
-            android:textStyle="bold"
-            android:gravity="center_vertical"
-            android:layout_weight="1"
-            android:layout_marginTop="6dp"
-            android:textSize="20dp"
-            android:text="원금과 수익률 변화는?"/>
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:textSize="14dp"
-            android:textColor="@color/colorTextHintGray"
-            android:text="* 원금의 추가 투입이 없다고 가정합니다."/>
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/result_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:background="@color/colorPrimary"
-            android:text="확인"
-            android:textColor="@color/colorWhite"
-            android:textSize="15dp"
-            />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:textColor="@color/colorBlack"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:text="원금이"/>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="3dp">
+
+                    <EditText
+                        android:id="@+id/principal_edit_box"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:maxLines="1"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp"
+                        android:gravity="right|center_vertical"
+                        android:textSize="20dp"
+                        android:inputType="number"
+                        android:textColor="@color/colorBlack"
+                        android:background="@drawable/editbox_shape_gray"
+                        android:layout_weight="2"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="3dp"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"
+                        android:gravity="center_vertical"
+                        android:layout_weight="8"
+                        android:text="원일 때"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="6dp">
+
+                    <TextView
+                        android:id="@+id/year_month_select_tv"
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:textSize="20dp"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:maxLines="1"
+                        android:textColor="@color/colorBlack"
+                        android:text="연"
+                        android:textStyle="bold"
+                        android:background="@drawable/editbox_shape_gray"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="6dp"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"
+                        android:gravity="center_vertical"
+                        android:text="복리로"/>
+
+                    <EditText
+                        android:id="@+id/rate_edit_box"
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="6dp"
+                        android:textSize="20dp"
+                        android:inputType="number"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:maxLines="1"
+                        android:textColor="@color/colorBlack"
+                        android:background="@drawable/editbox_shape_gray" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="6dp"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"
+                        android:gravity="center_vertical"
+                        android:text="%의 수익을 내면"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="6dp">
+
+                    <EditText
+                        android:id="@+id/no_edit_box"
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="20dp"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:background="@drawable/editbox_shape_gray"/>
+
+                    <TextView
+                        android:id="@+id/year_month_selected_tv"
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="6dp"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="20dp"
+                        android:maxLines="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="년"
+                        android:textStyle="bold"
+                        android:background="@drawable/editbox_shape_gray" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="6dp"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"
+                        android:gravity="center_vertical"
+                        android:text="후 까지의 "/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:layout_marginTop="6dp"
+                    android:textSize="20dp"
+                    android:text="원금과 수익률 변화는?"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textSize="14dp"
+                    android:textColor="@color/colorTextHintGray"
+                    android:text="* 원금의 추가 투입이 없다고 가정합니다."/>
+
+                <Button
+                    android:id="@+id/result_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/colorPrimary"
+                    android:text="확인"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="15dp" />
+
+            </LinearLayout>
+
+            <!--결과 화면-->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/result_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>
