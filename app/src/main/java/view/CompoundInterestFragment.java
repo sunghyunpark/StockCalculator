@@ -1,25 +1,25 @@
 package view;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.Selection;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.investmentkorea.android.stockcalculator.R;
-
-import java.text.DecimalFormat;
 
 import base.BaseFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import model.CompoundInterestModel;
 import util.Util;
+import view.dialog.SelectPeriodDialog;
 
 
 public class CompoundInterestFragment extends BaseFragment {
@@ -27,6 +27,10 @@ public class CompoundInterestFragment extends BaseFragment {
     private String principalBeforeStr = "";    // 원금 자릿수가 초과할 때 마지막 문자열 변수
 
     @BindView(R.id.principal_edit_box) EditText principalEditBox;    // 원금 editText
+    @BindView(R.id.rate_edit_box) EditText rateEditBox;    // 수익 editText
+    @BindView(R.id.no_edit_box) EditText noEditBox;    // 기간 차수(년, 월) editText
+    @BindView(R.id.year_month_select_tv) TextView yearMonthSelectTv;    // 연,월 TextView
+    @BindView(R.id.year_month_selected_tv) TextView yearMonthSelectedTv;    // 년,개월 TextView
 
     public static CompoundInterestFragment newInstance() {
         CompoundInterestFragment fragment = new CompoundInterestFragment();
@@ -77,11 +81,6 @@ public class CompoundInterestFragment extends BaseFragment {
                         principalBeforeStr = principalResult;    // 마지막으로 입력된 자릿수를 저장해둔다.
                         Selection.setSelection(e ,principalResult.length());    // 커서의 위치가 현재 입력된 위치의 끝쪽에 가게 해야 한다.
                     }
-                    principalEditBox.setText(principalResult);
-                    Editable e = principalEditBox.getText();
-                    // 커서의 위치가 현재 입력된 위치의 끝쪽에 가게 해야 한다.
-
-                    Selection.setSelection(e ,principalResult.length());
 
                 }
             }
@@ -91,6 +90,66 @@ public class CompoundInterestFragment extends BaseFragment {
 
             }
         });
+    }
+
+    /*
+    * 복리 계산 결과값.
+    * 최종원금 = 원금*(1 + (수익 / 100))^차수
+    * A = a(1 + (r/100))^n
+     */
+    private long getPrincipal(long principal, double rate, int period){
+        double rateAndPeriod = 1;
+        if(period == 0){
+            return principal;
+        }else {
+            for(int i=0;i<period;i++){
+                rateAndPeriod *= (1 + (rate / 100));
+            }
+        }
+        return (long) (principal * rateAndPeriod);
+    }
+
+    @OnClick({R.id.year_month_select_tv, R.id.result_btn}) void Click(View v){
+        switch (v.getId()){
+            case R.id.year_month_select_tv:
+                SelectPeriodDialog selectPeriodDialog = new SelectPeriodDialog(getContext(), new SelectPeriodDialog.SelectPeriodListener() {
+                    @Override
+                    public void selectYear(String yearStr1, String yearStr2) {
+                        yearMonthSelectTv.setText(yearStr1);
+                        yearMonthSelectedTv.setText(yearStr2);
+                    }
+
+                    @Override
+                    public void selectMonth(String monthStr1, String monthStr2) {
+                        yearMonthSelectTv.setText(monthStr1);
+                        yearMonthSelectedTv.setText(monthStr2);
+                    }
+                });
+                selectPeriodDialog.show();
+                break;
+            case R.id.result_btn:
+                long principal = Long.parseLong(principalEditBox.getText().toString().replace(",",""));    // 원금
+                double rate = Double.parseDouble(rateEditBox.getText().toString());    // 고정값 수익
+                double yearOrMonthRate;    // 결과값에 사용될 매년 혹은 매월 수익률
+                int period = Integer.parseInt(noEditBox.getText().toString());    // 차수
+                CompoundInterestModel compoundInterestModel;
+
+                for(int i=0;i<period;i++){
+                    compoundInterestModel = new CompoundInterestModel();
+                    compoundInterestModel.setNo(i);
+                    compoundInterestModel.setSum(principal);
+                    compoundInterestModel.setRate(rate);
+                    if(i==0){
+                        yearOrMonthRate = 0.0;
+                    }else{
+                        yearOrMonthRate = ((getPrincipal(principal,rate, i) - principal) / 100);
+                    }
+                    Log.d("fda", "차수 : "+i+"\n원금 : "+getPrincipal(principal, rate, i) + "\n수익률 : "+yearOrMonthRate );
+                }
+
+                showMessage("원금 : "+principal+"\n수익 : "+rate + "\n차수 : "+period+"\n최종원금 : "+getPrincipal(principal, rate, period));
+                break;
+        }
     }
 
 }
