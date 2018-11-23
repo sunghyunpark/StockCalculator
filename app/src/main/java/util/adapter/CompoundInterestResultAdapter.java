@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.investmentkorea.android.stockcalculator.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -17,6 +18,7 @@ import model.CompoundInterestModel;
 public class CompoundInterestResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private static final int TYPE_ITEM = 1;
     private ArrayList<CompoundInterestModel> compoundInterestModelArrayList;
+    private DecimalFormat format;
 
     public CompoundInterestResultAdapter(ArrayList<CompoundInterestModel> compoundInterestModelArrayList){
         this.compoundInterestModelArrayList = compoundInterestModelArrayList;
@@ -43,9 +45,18 @@ public class CompoundInterestResultAdapter extends RecyclerView.Adapter<Recycler
 
             VHitem.noOfPeriodTv.setText(currentItem.getNo()+"");
 
-            VHitem.principalTv.setText(currentItem.getSum()+"");
+            format = new DecimalFormat("###,###");
+            VHitem.principalTv.setText(getPrincipal(currentItem.getSum()));
 
             VHitem.yearOrMonthRateTv.setText(currentItem.getRate()+"");
+        }
+    }
+
+    private String getPrincipal(String principal){
+        try{
+            return format.format(Double.parseDouble(principal));
+        }catch (NumberFormatException nfe){
+            return principal;
         }
     }
 
