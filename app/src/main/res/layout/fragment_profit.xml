@@ -35,12 +35,14 @@
                         android:text="매수가(원)"/>
 
                     <EditText
+                        android:id="@+id/purchase_price_edit_box"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/editbox_shape_gray"
                         android:textColor="@color/colorBlack"
                         android:textStyle="bold"
                         android:maxLines="1"
+                        android:textSize="20dp"
                         android:paddingLeft="3dp"
                         android:paddingRight="3dp"
                         android:inputType="number"
@@ -63,12 +65,14 @@
                         android:text="매도가(원)"/>
 
                     <EditText
+                        android:id="@+id/selling_price_edit_box"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/editbox_shape_gray"
                         android:textColor="@color/colorBlack"
                         android:textStyle="bold"
                         android:maxLines="1"
+                        android:textSize="20dp"
                         android:paddingLeft="3dp"
                         android:paddingRight="3dp"
                         android:inputType="number"
@@ -91,11 +95,13 @@
                         android:text="수량(개)"/>
 
                     <EditText
+                        android:id="@+id/amount_edit_box"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/editbox_shape_gray"
                         android:textColor="@color/colorBlack"
                         android:textStyle="bold"
+                        android:textSize="20dp"
                         android:maxLines="1"
                         android:paddingLeft="3dp"
                         android:paddingRight="3dp"
@@ -118,16 +124,19 @@
                         android:layout_weight="7"
                         android:text="세금(%)"/>
 
-                    <EditText
+                    <TextView
+                        android:id="@+id/tax_tv"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/editbox_shape_gray"
                         android:textColor="@color/colorBlack"
                         android:textStyle="bold"
-                        android:maxLines="1"
+                        android:text="0.3"
+                        android:textSize="20dp"
+                        android:gravity="center_vertical"
                         android:paddingLeft="3dp"
                         android:paddingRight="3dp"
-                        android:inputType="number"
+                        android:layout_gravity="center_vertical"
                         android:layout_weight="3"/>
                 </LinearLayout>
 
@@ -147,6 +156,7 @@
                         android:text="수수료(%)"/>
 
                     <EditText
+                        android:id="@+id/charge_edit_box"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/editbox_shape_gray"
@@ -154,8 +164,10 @@
                         android:textStyle="bold"
                         android:maxLines="1"
                         android:paddingLeft="3dp"
+                        android:textSize="20dp"
                         android:paddingRight="3dp"
-                        android:inputType="number"
+                        android:inputType="numberDecimal"
+                        android:text="0.015"
                         android:layout_weight="3"/>
                 </LinearLayout>
 

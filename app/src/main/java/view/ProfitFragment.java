@@ -1,20 +1,29 @@
 package view;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.investmentkorea.android.stockcalculator.R;
 
+import base.BaseFragment;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 실 수익 계산 화면
  */
-public class ProfitFragment extends Fragment {
+public class ProfitFragment extends BaseFragment {
 
+    @BindView(R.id.purchase_price_edit_box) EditText purchasePriceEditBox;
+    @BindView(R.id.selling_price_edit_box) EditText sellingPriceEditBox;
+    @BindView(R.id.amount_edit_box) EditText amountEditBox;
+    @BindView(R.id.tax_tv) TextView taxTv;
+    @BindView(R.id.charge_edit_box) EditText chargeEditBox;
     public static ProfitFragment newInstance() {
         ProfitFragment fragment = new ProfitFragment();
         Bundle args = new Bundle();
@@ -40,6 +49,25 @@ public class ProfitFragment extends Fragment {
 
     private void init(){
 
+    }
+
+    private long getProfit(int purchasePrice, int sellingPrice, int amount, double tax, double charge){
+        return (long)(amount * (sellingPrice - purchasePrice - ((double)(purchasePrice * charge) / 100.0) - ((double)(sellingPrice * charge) / 100.0) - ((double)(sellingPrice * tax) / 100.0)));
+    }
+
+    @OnClick({R.id.result_btn}) void Click(View v){
+        switch (v.getId()){
+            case R.id.result_btn:
+                int purchasePrice = Integer.parseInt(purchasePriceEditBox.getText().toString());
+                int sellingPrice = Integer.parseInt(sellingPriceEditBox.getText().toString());
+                int amount = Integer.parseInt(amountEditBox.getText().toString());
+                double tax = Double.parseDouble(taxTv.getText().toString());
+                double charge = Double.parseDouble(chargeEditBox.getText().toString());
+
+                showMessage(""+getProfit(purchasePrice, sellingPrice, amount, tax, charge));
+
+                break;
+        }
     }
 
 }
