@@ -20,18 +20,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textColor="@color/colorBlack"
-        android:layout_weight="2"
+        android:layout_weight="2.5"
         android:textSize="16dp"
         android:textStyle="bold"
         android:gravity="center_horizontal|center_vertical"
         android:background="@drawable/table_shape"
-        android:text="원금"/>
+        android:text="원금(원)"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textColor="@color/colorBlack"
-        android:layout_weight="4"
+        android:layout_weight="3.8"
         android:textSize="16dp"
         android:textStyle="bold"
         android:gravity="center_horizontal|center_vertical"

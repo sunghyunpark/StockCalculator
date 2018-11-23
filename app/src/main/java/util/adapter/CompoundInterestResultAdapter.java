@@ -18,7 +18,7 @@ import model.CompoundInterestModel;
 public class CompoundInterestResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private static final int TYPE_ITEM = 1;
     private ArrayList<CompoundInterestModel> compoundInterestModelArrayList;
-    private DecimalFormat format;
+    private DecimalFormat format = new DecimalFormat("###,###");
 
     public CompoundInterestResultAdapter(ArrayList<CompoundInterestModel> compoundInterestModelArrayList){
         this.compoundInterestModelArrayList = compoundInterestModelArrayList;
@@ -45,13 +45,16 @@ public class CompoundInterestResultAdapter extends RecyclerView.Adapter<Recycler
 
             VHitem.noOfPeriodTv.setText(currentItem.getNo()+"");
 
-            format = new DecimalFormat("###,###");
             VHitem.principalTv.setText(getPrincipal(currentItem.getSum()));
 
-            VHitem.yearOrMonthRateTv.setText(currentItem.getRate()+"");
+            VHitem.yearOrMonthRateTv.setText(currentItem.getRate());
         }
     }
 
+    /*
+    * ArrayList 를 통해 받아온 데이터에서 Double 로 파싱되지 않는 경우가 있어 예외처리를 통해 반환한다.
+    * ex. ArrayList 의 0번째는 '년, 원금, 수익률' 문자로 구성, 1000억 이상의 경우 문자로 구성
+     */
     private String getPrincipal(String principal){
         try{
             return format.format(Double.parseDouble(principal));

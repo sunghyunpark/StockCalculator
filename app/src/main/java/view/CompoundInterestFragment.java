@@ -32,7 +32,8 @@ import view.dialog.SelectPeriodDialog;
 
 public class CompoundInterestFragment extends BaseFragment {
 
-    private static final long MAX_OF_PRINCIPAL = 30000000000L;
+    private static final long MAX_OF_PRINCIPAL = 100000000000L;
+    private static final long MAX_OF_RATE = 1000000;
     private String principalResult = "";    // 원금 문자열에 콤마를 나타내기 위한 변수
     private String principalBeforeStr = "";    // 원금 자릿수가 초과할 때 마지막 문자열 변수
     private boolean isYearMode = true;
@@ -242,12 +243,16 @@ public class CompoundInterestFragment extends BaseFragment {
                         compoundInterestModel = new CompoundInterestModel();
                         compoundInterestModel.setNo(String.valueOf(i-1));
                         if(getPrincipal(principal,rate, i-1) > MAX_OF_PRINCIPAL){
-                            compoundInterestModel.setSum("300억 이상");
+                            compoundInterestModel.setSum("1000억 이상");
                         }else{
                             compoundInterestModel.setSum(String.valueOf(getPrincipal(principal,rate, i-1)));
                         }
                         yearOrMonthRate = getYearOrMonthRate(getPrincipal(principal,rate, i-1), principal, i-1);
-                        compoundInterestModel.setRate(String.valueOf(yearOrMonthRate));
+                        if(yearOrMonthRate > MAX_OF_RATE){
+                            compoundInterestModel.setRate("1,000,000% 이상");
+                        }else{
+                            compoundInterestModel.setRate(String.valueOf(yearOrMonthRate)+"%");
+                        }
                         compoundInterestModelArrayList.add(compoundInterestModel);
                         Log.d("calculateResult", "\n차수 : "+(i-1)+"\n원금 : "+principal+"\n최종원금 : "+getPrincipal(principal, rate, i) + "\n수익률 : "+yearOrMonthRate );
                     }
