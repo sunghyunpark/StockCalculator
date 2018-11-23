@@ -1,7 +1,5 @@
 package view;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,7 +10,9 @@ import com.investmentkorea.android.stockcalculator.R;
 
 import butterknife.ButterKnife;
 
-
+/**
+ * 실 수익 계산 화면
+ */
 public class ProfitFragment extends Fragment {
 
     public static ProfitFragment newInstance() {
@@ -36,6 +36,10 @@ public class ProfitFragment extends Fragment {
         ButterKnife.bind(this, v);
 
         return v;
+    }
+
+    private void init(){
+
     }
 
 }

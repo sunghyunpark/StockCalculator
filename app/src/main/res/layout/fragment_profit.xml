@@ -5,5 +5,188 @@
     android:orientation="vertical"
     tools:context="view.ProfitFragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--입력 영역-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorBlack"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:layout_weight="7"
+                        android:text="매수가(원)"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/editbox_shape_gray"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"
+                        android:maxLines="1"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp"
+                        android:inputType="number"
+                        android:layout_weight="3"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorBlack"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:layout_weight="7"
+                        android:text="매도가(원)"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/editbox_shape_gray"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"
+                        android:maxLines="1"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp"
+                        android:inputType="number"
+                        android:layout_weight="3"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorBlack"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:layout_weight="7"
+                        android:text="수량(개)"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/editbox_shape_gray"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"
+                        android:maxLines="1"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp"
+                        android:inputType="number"
+                        android:layout_weight="3"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorBlack"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:layout_weight="7"
+                        android:text="세금(%)"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/editbox_shape_gray"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"
+                        android:maxLines="1"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp"
+                        android:inputType="number"
+                        android:layout_weight="3"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorBlack"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:layout_weight="7"
+                        android:text="수수료(%)"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/editbox_shape_gray"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"
+                        android:maxLines="1"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp"
+                        android:inputType="number"
+                        android:layout_weight="3"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorBlack"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="20dp"
+                    android:text="이때 실수익과 수익률은?"/>
+
+                <Button
+                    android:id="@+id/result_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/colorPrimary"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:text="확인"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="15dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
 
 </LinearLayout>
