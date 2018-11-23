@@ -40,7 +40,7 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return "실 수익 계산";
             case 1:
-                return "평균 매수단가 계산";
+                return "매수단가 계산";
             case 2:
                 return "복리 계산";
             default:
