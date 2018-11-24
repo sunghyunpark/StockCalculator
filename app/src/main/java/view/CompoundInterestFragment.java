@@ -33,9 +33,9 @@ import view.dialog.SelectPeriodDialog;
 
 
 public class CompoundInterestFragment extends BaseFragment {
-
-    private static final long MAX_OF_PRINCIPAL = 100000000000L;
-    private static final long MAX_OF_RATE = 1000000;
+    // double 로 자바에서 큰 자릿수의 계산을 하게되면 오차가 생기는 이슈가 있어 BigDecimal 로 계산한다.
+    private static final BigDecimal MAX_OF_PRINCIPAL = new BigDecimal(String.valueOf(100000000000L));    // 1000억
+    private static final BigDecimal MAX_OF_RATE = new BigDecimal(String.valueOf(1000000));    // 100만
     private String principalResult = "";    // 원금 문자열에 콤마를 나타내기 위한 변수
     private String principalBeforeStr = "";    // 원금 자릿수가 초과할 때 마지막 문자열 변수
     private boolean isYearMode = true;
@@ -99,7 +99,7 @@ public class CompoundInterestFragment extends BaseFragment {
                     // 숫자에 Comma를 추가해주는 메소드 호출
                     principalResult = Util.makeStringWithComma(s.toString().replace(",",""),true);
                     if(principalResult.length() > 13){    // 17인 이유는 , 까지 포함된 자릿수이기 때문이다.
-                        showMessage("최대 10억까지 입력 가능합니다.");
+                        showMessage("최대 10억단위까지 입력 가능합니다.");
                         principalEditBox.setText(principalBeforeStr);
                     }else{
                         principalEditBox.setText(principalResult);
@@ -150,7 +150,6 @@ public class CompoundInterestFragment extends BaseFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                 // 년/개월 값을 50까지만 입력
                 if(s.toString().length() > 0){
                     if(Integer.parseInt(s.toString()) > 50){
@@ -249,14 +248,14 @@ public class CompoundInterestFragment extends BaseFragment {
                         compoundInterestModel = new CompoundInterestModel();
                         compoundInterestModel.setNo(String.valueOf(i-1));
 
-                        if(getPrincipal(principal, rate, i-1).compareTo(new BigDecimal(String.valueOf(MAX_OF_PRINCIPAL))) == 1){
+                        if(getPrincipal(principal, rate, i-1).compareTo(MAX_OF_PRINCIPAL) == 1){
                             compoundInterestModel.setSum("1000억 초과");
                         }else{
                             compoundInterestModel.setSum(String.valueOf(getPrincipal(principal,rate, i-1)));
                         }
 
                         yearOrMonthRate = getYearOrMonthRate(getPrincipal(principal,rate, i-1), principal, i-1);
-                        if(yearOrMonthRate.compareTo(new BigDecimal(String.valueOf(MAX_OF_RATE))) == 1){
+                        if(yearOrMonthRate.compareTo(MAX_OF_RATE) == 1){
                             compoundInterestModel.setRate("1,000,000% 초과");
                         }else{
                             compoundInterestModel.setRate(String.valueOf(yearOrMonthRate)+"%");
