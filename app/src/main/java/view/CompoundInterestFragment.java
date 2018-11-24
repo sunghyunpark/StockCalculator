@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import com.investmentkorea.android.stockcalculator.R;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -170,16 +172,17 @@ public class CompoundInterestFragment extends BaseFragment {
     * 최종원금 = 원금*(1 + (수익 / 100))^차수
     * A = a(1 + (r/100))^n
      */
-    private long getPrincipal(long principal, double rate, int period){
-        double rateAndPeriod = 1;
+    private BigDecimal getPrincipal(long principal, double rate, int period){
+        double rateAndPeriod = 1.0;
+
         if(period == 0){    // 0회차의 경우 원금과 동일하므로 원금을 반환
-            return principal;
+            return new BigDecimal(String.valueOf(principal));
         }else {    // 1회차 이상부터는 수식에 맞게 n승.
             for(int i=0;i<period;i++){
                 rateAndPeriod *= (1 + (rate / 100));
             }
         }
-        return (long) (principal * rateAndPeriod);
+        return new BigDecimal(String.valueOf(principal)).multiply(new BigDecimal(String.valueOf(rateAndPeriod)));
     }
 
     /*
@@ -187,12 +190,15 @@ public class CompoundInterestFragment extends BaseFragment {
     * result = ((An - A) / A) * 100
     *
      */
-    private double getYearOrMonthRate(long resultOfPrincipal, long principal, int period){
-        DecimalFormat form = new DecimalFormat("#.#");
+    private BigDecimal getYearOrMonthRate(BigDecimal resultOfPrincipal, long principal, int period){
+        BigDecimal principalBigDecimal = new BigDecimal(String.valueOf(principal));
         if(period == 0){  // 0회차인 경우 원금과 동일하므로 수익률은 0%
-            return 0.0;
+            return new BigDecimal(String.valueOf(0));
         }else{  // 1회차 이상
-            return Double.parseDouble(form.format(((resultOfPrincipal - principal) / (double)principal) * 100.0));
+            return resultOfPrincipal.subtract(principalBigDecimal)
+                    .divide(principalBigDecimal)
+                    .multiply(new BigDecimal(String.valueOf(100)))
+                    .setScale(1, BigDecimal.ROUND_DOWN);
         }
     }
 
@@ -227,7 +233,7 @@ public class CompoundInterestFragment extends BaseFragment {
 
                     long principal = Long.parseLong(principalEditBox.getText().toString().replace(",",""));    // 원금
                     double rate = Double.parseDouble(rateEditBox.getText().toString());    // 고정값 수익
-                    double yearOrMonthRate;   // 결과값에 사용될 매년 혹은 매월 수익률
+                    BigDecimal yearOrMonthRate;   // 결과값에 사용될 매년 혹은 매월 수익률
                     int period = Integer.parseInt(noEditBox.getText().toString());    // 차수
 
                     // 첫번째 item 은 설명 문구 이므로 먼저 리스트에 넣는다.
@@ -242,14 +248,16 @@ public class CompoundInterestFragment extends BaseFragment {
                     for(int i=1;i<=period+1;i++){
                         compoundInterestModel = new CompoundInterestModel();
                         compoundInterestModel.setNo(String.valueOf(i-1));
-                        if(getPrincipal(principal,rate, i-1) > MAX_OF_PRINCIPAL){
-                            compoundInterestModel.setSum("1000억 이상");
+
+                        if(getPrincipal(principal, rate, i-1).compareTo(new BigDecimal(String.valueOf(MAX_OF_PRINCIPAL))) == 1){
+                            compoundInterestModel.setSum("1000억 초과");
                         }else{
                             compoundInterestModel.setSum(String.valueOf(getPrincipal(principal,rate, i-1)));
                         }
+
                         yearOrMonthRate = getYearOrMonthRate(getPrincipal(principal,rate, i-1), principal, i-1);
-                        if(yearOrMonthRate > MAX_OF_RATE){
-                            compoundInterestModel.setRate("1,000,000% 이상");
+                        if(yearOrMonthRate.compareTo(new BigDecimal(String.valueOf(MAX_OF_RATE))) == 1){
+                            compoundInterestModel.setRate("1,000,000% 초과");
                         }else{
                             compoundInterestModel.setRate(String.valueOf(yearOrMonthRate)+"%");
                         }

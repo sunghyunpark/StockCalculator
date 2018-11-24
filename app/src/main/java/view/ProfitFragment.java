@@ -51,8 +51,8 @@ public class ProfitFragment extends BaseFragment {
 
     }
 
-    private long getProfit(int purchasePrice, int sellingPrice, int amount, double tax, double charge){
-        return (long)(amount * (sellingPrice - purchasePrice - ((double)(purchasePrice * charge) / 100.0) - ((double)(sellingPrice * charge) / 100.0) - ((double)(sellingPrice * tax) / 100.0)));
+    private double getProfit(int purchasePrice, int sellingPrice, int amount, double tax, double charge){
+        return ((double)amount * ((double)sellingPrice - (double)purchasePrice - (((double)purchasePrice * charge) / 100.0) - (((double)sellingPrice * charge) / 100.0) - (((double)sellingPrice * tax) / 100.0)));
     }
 
     @OnClick({R.id.result_btn}) void Click(View v){
