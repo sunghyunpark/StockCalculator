@@ -200,7 +200,10 @@ public class ProfitFragment extends BaseFragment {
         }else if(profit.compareTo(bd3) == -1){
             resultOfProfitTv.setText("-100억 미만");
         }else{
-            resultOfProfitTv.setText(format.format(Long.parseLong(String.valueOf(profit))));
+            if(profit.compareTo(bd) == 1)
+                resultOfProfitTv.setText("+"+format.format(Long.parseLong(String.valueOf(profit))));
+            else
+                resultOfProfitTv.setText(format.format(Long.parseLong(String.valueOf(profit))));
         }
     }
 
@@ -227,7 +230,10 @@ public class ProfitFragment extends BaseFragment {
         }else if(rate.compareTo(bd3) == -1){
             resultOfRate.setText("-10,000% 미만");
         }else{
-            resultOfRate.setText(String.valueOf(rate));
+            if(rate.compareTo(bd) == 1)
+                resultOfRate.setText("+"+String.valueOf(rate));
+            else
+                resultOfRate.setText(String.valueOf(rate));
         }
     }
 

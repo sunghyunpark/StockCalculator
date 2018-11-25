@@ -99,7 +99,10 @@ public class CompoundInterestFragment extends BaseFragment {
                     // 숫자에 Comma를 추가해주는 메소드 호출
                     principalResult = Util.makeStringWithComma(s.toString().replace(",",""),true);
                     if(principalResult.length() > 13){    // 17인 이유는 , 까지 포함된 자릿수이기 때문이다.
-                        showMessage("최대 10억단위까지 입력 가능합니다.");
+                        if(Long.parseLong(s.toString().replace(",", "")) > 1000000000L){
+                            principalEditBox.setText(null);
+                        }
+                        showMessage("최대 10억까지 입력 가능합니다.");
                         principalEditBox.setText(principalBeforeStr);
                     }else{
                         principalEditBox.setText(principalResult);
@@ -119,6 +122,8 @@ public class CompoundInterestFragment extends BaseFragment {
 
         // 고정 수익 EditText
         rateEditBox.addTextChangedListener(new TextWatcher() {
+            BigDecimal bigDecimal;
+            BigDecimal bigDecimal_30 = new BigDecimal(String.valueOf(30));
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -128,9 +133,17 @@ public class CompoundInterestFragment extends BaseFragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // 고정 수익의 값을 30까지만 입력
                 if(s.toString().length() > 0){
-                    if(Integer.parseInt(s.toString()) > 30){
+                    try {
+                        bigDecimal = new BigDecimal(String.valueOf(s.toString()));
+                        if(bigDecimal.compareTo(bigDecimal_30) == 1){
+                            rateEditBox.setText(null);
+                            showMessage("수익은 최대 30%까지만 입력 가능합니다.");
+                        }else if(String.valueOf(s.toString()).contains(".") && String.valueOf(s.toString()).length() > 3){
+                            rateEditBox.setText(null);
+                            showMessage("소수점 첫째 자리까지 입력 가능합니다.");
+                        }
+                    }catch (NumberFormatException NFE){
                         rateEditBox.setText(null);
-                        showMessage("수익은 최대 30%까지만 입력 가능합니다.");
                     }
                 }
             }
