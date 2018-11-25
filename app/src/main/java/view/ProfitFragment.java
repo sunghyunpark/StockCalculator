@@ -139,6 +139,40 @@ public class ProfitFragment extends BaseFragment {
             }
         });
 
+        // 수수료
+        chargeEditBox.addTextChangedListener(new TextWatcher() {
+            BigDecimal bigDecimal;
+            BigDecimal bigDecimal_1 = new BigDecimal(String.valueOf(1));
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // 수수료 0 ~ 1 && 소수점 셋째자리까지
+                if(s.toString().length() > 0){
+                    try {
+                        bigDecimal = new BigDecimal(String.valueOf(s.toString()));
+                        if(bigDecimal.compareTo(bigDecimal_1) == 1){
+                            chargeEditBox.setText(null);
+                            showMessage("최대 1%까지만 입력 가능합니다.");
+                        }else if(String.valueOf(s.toString()).contains(".") && String.valueOf(s.toString()).length() > 5){
+                            chargeEditBox.setText(null);
+                            showMessage("소수점 셋째 자리까지 입력 가능합니다.");
+                        }
+                    }catch (NumberFormatException NFE){
+                        chargeEditBox.setText(null);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
     }
 
     /*
@@ -164,16 +198,20 @@ public class ProfitFragment extends BaseFragment {
 
     /*
     * 수익률 계산
-    * 매수가 a, 매도가 b
-    * 수식 > ((b - a) / a) * 100
+    * 매수가 a, 매도가 b, 수수료 x, 세금 y
+    * 수식 > ((100 * b) - (100 * a) - (a * x) - (b * x) - (b * y)) / a
      */
-    private BigDecimal getRate(int purchasePrice, int sellingPrice){
+    private BigDecimal getRate(int purchasePrice, int sellingPrice, double charge, double tax){
         BigDecimal purchasePriceBigDecimal = new BigDecimal(String.valueOf(purchasePrice));
         BigDecimal sellingPriceBigDecimal = new BigDecimal(String.valueOf(sellingPrice));
+        BigDecimal chargeBigDecimal = new BigDecimal(String.valueOf(charge));
 
-        return sellingPriceBigDecimal.subtract(purchasePriceBigDecimal)
+        return sellingPriceBigDecimal.multiply(new BigDecimal(String.valueOf(100)))
+                .subtract(purchasePriceBigDecimal.multiply(new BigDecimal(String.valueOf(100))))
+                .subtract(purchasePriceBigDecimal.multiply(chargeBigDecimal))
+                .subtract(sellingPriceBigDecimal.multiply(chargeBigDecimal))
+                .subtract(sellingPriceBigDecimal.multiply(new BigDecimal(String.valueOf(tax))))
                 .divide(purchasePriceBigDecimal, 10, BigDecimal.ROUND_DOWN)
-                .multiply(new BigDecimal(String.valueOf(100)))
                 .setScale(1, BigDecimal.ROUND_DOWN);
     }
 
@@ -246,8 +284,7 @@ public class ProfitFragment extends BaseFragment {
                     showMessage("정보를 입력해주세요.");
                 }else if((Integer.parseInt(purchasePriceEditBox.getText().toString().replace(",","")) > 3000000) || (Integer.parseInt(purchasePriceEditBox.getText().toString().replace(",","")) < 100) ||
                         (Integer.parseInt(sellingPriceEditBox.getText().toString().replace(",","")) > 3000000) || (Integer.parseInt(sellingPriceEditBox.getText().toString().replace(",","")) < 100) ||
-                        (Integer.parseInt(amountEditBox.getText().toString().replace(",","")) > 10000000) || Integer.parseInt(amountEditBox.getText().toString().replace(",","")) < 1 ||
-                        (Double.parseDouble(chargeEditBox.getText().toString()) > 1) || (Double.parseDouble(chargeEditBox.getText().toString()) < 0)){
+                        (Integer.parseInt(amountEditBox.getText().toString().replace(",","")) > 10000000) || Integer.parseInt(amountEditBox.getText().toString().replace(",","")) < 1){
                     showMessage("입력 값을 다시 확인해주세요.");
                 }else {
                     int purchasePrice = Integer.parseInt(purchasePriceEditBox.getText().toString().replace(",",""));
@@ -261,7 +298,7 @@ public class ProfitFragment extends BaseFragment {
 
                     resultLayout.setVisibility(View.VISIBLE);
                     setResultOfProfit(getProfit(purchasePrice, sellingPrice, amount, tax, charge));
-                    setResultOfRate(getRate(purchasePrice, sellingPrice));
+                    setResultOfRate(getRate(purchasePrice, sellingPrice, charge, tax));
                 }
 
                 break;

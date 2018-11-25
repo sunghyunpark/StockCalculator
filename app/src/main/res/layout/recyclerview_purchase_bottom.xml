@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/no_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorBlack"
+            android:layout_weight="3.8"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:gravity="center_horizontal|center_vertical"
+            android:background="@drawable/table_shape" />
+
+        <TextView
+            android:id="@+id/select_type_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3.8"
+            android:textSize="16dp"
+            android:background="@drawable/table_shape"
+            android:gravity="center_vertical|center_horizontal"
+            android:textColor="@color/colorBlack"
+            android:text="선택"/>
+
+        <EditText
+            android:id="@+id/amount_edit_box"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorBlack"
+            android:layout_weight="3.5"
+            android:inputType="number"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:gravity="center_horizontal|center_vertical"
+            android:background="@drawable/table_shape"/>
+
+        <EditText
+            android:id="@+id/price_edit_box"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorBlack"
+            android:layout_weight="2"
+            android:inputType="number"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:gravity="center_horizontal|center_vertical"
+            android:background="@drawable/table_shape"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/add_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:background="@drawable/btn_shape_primary_color"
+            android:text="추가"
+            android:textSize="15dp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:layout_gravity="start"/>
+
+        <TextView
+            android:id="@+id/init_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/add_btn"
+            android:layout_marginLeft="10dp"
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:background="@drawable/btn_shape_primary_color"
+            android:text="초기화"
+            android:textSize="15dp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+</LinearLayout>

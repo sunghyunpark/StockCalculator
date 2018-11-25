@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="30dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/no_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/colorBlack"
+        android:layout_weight="3.8"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:gravity="center_horizontal|center_vertical"
+        android:background="@drawable/table_shape" />
+
+    <TextView
+        android:id="@+id/select_type_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3.8"
+        android:textSize="16dp"
+        android:background="@drawable/table_shape"
+        android:gravity="center_vertical|center_horizontal"
+        android:textColor="@color/colorPrimary"
+        android:text="선택"/>
+
+    <TextView
+        android:id="@+id/amount_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/colorBlack"
+        android:layout_weight="3.5"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:gravity="center_horizontal|center_vertical"
+        android:background="@drawable/table_shape"/>
+
+    <TextView
+        android:id="@+id/price_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/colorBlack"
+        android:layout_weight="2"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:gravity="center_horizontal|center_vertical"
+        android:background="@drawable/table_shape"/>
+
+</LinearLayout>
