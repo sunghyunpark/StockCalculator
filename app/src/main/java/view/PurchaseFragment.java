@@ -3,6 +3,7 @@ package view;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,12 +85,37 @@ public class PurchaseFragment extends BaseFragment {
 
     }
 
+    private String getAveragePurchasePrice(ArrayList<PurchaseModel> purchaseModelArrayList){
+        long currentAveragePrice = 0;    // 현재 평균 매수 단가
+        int currentAmount = 0;    // 현재 총 수량
+        int cnt = purchaseModelArrayList.size();
+
+        for(int i=0;i<cnt;i++){
+            if(purchaseModelArrayList.get(i).getType() == 1){
+                // 매수
+                if(i == 0){
+                    currentAmount = purchaseModelArrayList.get(i).getAmount();
+                    currentAveragePrice = (purchaseModelArrayList.get(i).getPrice() * purchaseModelArrayList.get(i).getAmount()) / currentAmount;
+                }else{
+                    currentAveragePrice = ((currentAveragePrice * currentAmount) + (purchaseModelArrayList.get(i).getPrice() * purchaseModelArrayList.get(i).getAmount())) / (currentAmount + purchaseModelArrayList.get(i).getAmount());
+                    currentAmount += purchaseModelArrayList.get(i).getAmount();
+                }
+            }else{
+                // 매도
+                currentAmount -= purchaseModelArrayList.get(i).getAmount();
+            }
+        }
+
+        return String.valueOf(currentAveragePrice);
+    }
+
     @OnClick({R.id.result_btn}) void Click(View v){
         switch (v.getId()){
             case R.id.result_btn:
                 if(purchaseModelArrayList.isEmpty()){
                     showMessage("데이터가 없습니다.");
                 }else{
+                    Log.d("resultPurchase", getAveragePurchasePrice(purchaseModelArrayList)+"원");
 
                 }
                 break;

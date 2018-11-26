@@ -73,7 +73,7 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             VHitem.noTv.setText(String.valueOf(position));
 
-            VHitem.amountTv.setText(String.valueOf(currentItem.getAmount()));
+            VHitem.amountTv.setText(format.format(currentItem.getAmount()));
 
             VHitem.priceTv.setText(format.format(currentItem.getPrice()));
 
@@ -208,22 +208,31 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         @OnClick({R.id.add_btn, R.id.init_btn, R.id.select_type_tv}) void Click(View v){
             switch (v.getId()){
                 case R.id.add_btn:
+                    int type = getType(selectTypeTv.getText().toString());    // 0(선택), 1(매수), -1(매도)
+                    String amountStr = amountEditBox.getText().toString().trim();
+                    String priceStr = priceEditBox.getText().toString().trim();
+
                     /*
                     추가 버튼을 누른 뒤에는 각 bottom 요소들을 초기화 해준다.
                      */
-                    if(getType(selectTypeTv.getText().toString()) == 0){
+                    if(type == 0){
                         Util.showToast(context, "매수/매도를 선택해주세요.");
-                    }else if(amountEditBox.getText().toString().trim().equals("")){
+                    }else if(amountStr.equals("")){
                         Util.showToast(context, "수량을 입력해주세요.");
-                    }else if(priceEditBox.getText().toString().trim().equals("")){
+                    }else if((type == 1) && (priceStr.equals(""))){
                         Util.showToast(context, "가격을 입력해주세요.");
                     }else{
-                        if((Integer.parseInt(priceEditBox.getText().toString().replace(",","")) > 3000000) || (Integer.parseInt(priceEditBox.getText().toString().replace(",","")) < 100)){
-                            Util.showToast(context, "가격 값을 다시 확인해주세요.");
-                        }else if(Integer.parseInt(amountEditBox.getText().toString().replace(",","")) > 10000000 || Integer.parseInt(amountEditBox.getText().toString().replace(",","")) < 1){
-                            Util.showToast(context, "수량 값을 다시 확인해주세요.");
-                        }else{
-                            purchaseAdapterListener.addData(getType(selectTypeTv.getText().toString()), Integer.parseInt(amountEditBox.getText().toString()), Long.parseLong(priceEditBox.getText().toString().replace(",", "")));
+                        try{
+                            if((Integer.parseInt(priceStr.replace(",","")) > 3000000) || (Integer.parseInt(priceStr.replace(",","")) < 100)){
+                                Util.showToast(context, "가격 값을 다시 확인해주세요.");
+                            }else if(Integer.parseInt(amountStr.replace(",","")) > 10000000 || Integer.parseInt(amountStr.replace(",","")) < 1){
+                                Util.showToast(context, "수량 값을 다시 확인해주세요.");
+                            }else{
+                                purchaseAdapterListener.addData(getType(selectTypeTv.getText().toString()), Integer.parseInt(amountStr.replace(",", "")), Long.parseLong(priceStr.replace(",", "")));
+                                initView();
+                            }
+                        }catch (NumberFormatException NFE){
+                            purchaseAdapterListener.addData(getType(selectTypeTv.getText().toString()), Integer.parseInt(amountStr.replace(",", "")), 0);
                             initView();
                         }
                     }
@@ -256,12 +265,17 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         public void selectPurchase(String Str) {
                             selectTypeTv.setText(Str);
                             selectTypeTv.setTextColor(context.getResources().getColor(R.color.colorRed));
+
+                            priceEditBox.setEnabled(true);
                         }
 
                         @Override
                         public void selectSell(String Str) {
                             selectTypeTv.setText(Str);
                             selectTypeTv.setTextColor(context.getResources().getColor(R.color.colorBlue));
+
+                            priceEditBox.setText(null);
+                            priceEditBox.setEnabled(false);
                         }
                     });
                     selectPurchaseOrSellDialog.show();
