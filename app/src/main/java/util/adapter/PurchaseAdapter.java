@@ -137,6 +137,7 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public class Bottom_VH extends RecyclerView.ViewHolder{
         private String purchasePriceStr = "";
+        private String amountStr = "";
 
         @BindView(R.id.add_btn) TextView addBtn;
         @BindView(R.id.init_btn) TextView initBtn;
@@ -175,6 +176,33 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 }
             });
 
+            /*
+            수량 EditText
+             */
+            amountEditBox.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+                    if (!s.toString().equals(amountStr)) {
+                        // 숫자에 Comma를 추가해주는 메소드 호출
+                        amountStr = Util.makeStringWithComma(s.toString().replace(",",""),true);
+                        amountEditBox.setText(amountStr);
+                        Editable e = amountEditBox.getText();
+                        Selection.setSelection(e ,amountStr.length());
+
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
+
         }
 
         @OnClick({R.id.add_btn, R.id.init_btn, R.id.select_type_tv}) void Click(View v){
@@ -190,8 +218,14 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     }else if(priceEditBox.getText().toString().trim().equals("")){
                         Util.showToast(context, "가격을 입력해주세요.");
                     }else{
-                        purchaseAdapterListener.addData(getType(selectTypeTv.getText().toString()), Integer.parseInt(amountEditBox.getText().toString()), Long.parseLong(priceEditBox.getText().toString().replace(",", "")));
-                        initView();
+                        if((Integer.parseInt(priceEditBox.getText().toString().replace(",","")) > 3000000) || (Integer.parseInt(priceEditBox.getText().toString().replace(",","")) < 100)){
+                            Util.showToast(context, "가격 값을 다시 확인해주세요.");
+                        }else if(Integer.parseInt(amountEditBox.getText().toString().replace(",","")) > 10000000 || Integer.parseInt(amountEditBox.getText().toString().replace(",","")) < 1){
+                            Util.showToast(context, "수량 값을 다시 확인해주세요.");
+                        }else{
+                            purchaseAdapterListener.addData(getType(selectTypeTv.getText().toString()), Integer.parseInt(amountEditBox.getText().toString()), Long.parseLong(priceEditBox.getText().toString().replace(",", "")));
+                            initView();
+                        }
                     }
                     break;
                 case R.id.init_btn:
