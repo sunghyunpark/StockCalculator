@@ -309,9 +309,6 @@ public class ProfitFragment extends BaseFragment {
                     double tax = Double.parseDouble(taxTv.getText().toString());
                     double charge = Double.parseDouble(chargeEditBox.getText().toString());
 
-                    Log.d("profitResult", "\n매수가 : "+purchasePrice+"\n매도가 : "+sellingPrice+"\n수량 : "+amount+"\n세금 : "+tax+"\n수수료 : "+charge+
-                    "\n실 수익 : "+getProfit(purchasePrice, sellingPrice, amount, tax, charge));
-
                     resultLayout.setVisibility(View.VISIBLE);
                     setResultOfProfit(getProfit(purchasePrice, sellingPrice, amount, tax, charge));
                     setResultOfRate(getRate(purchasePrice, sellingPrice, charge, tax));

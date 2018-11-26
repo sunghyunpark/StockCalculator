@@ -208,7 +208,7 @@ public class CompoundInterestFragment extends BaseFragment {
             return new BigDecimal(String.valueOf(0));
         }else{  // 1회차 이상
             return resultOfPrincipal.subtract(principalBigDecimal)
-                    .divide(principalBigDecimal)
+                    .divide(principalBigDecimal, 10, BigDecimal.ROUND_DOWN)
                     .multiply(new BigDecimal(String.valueOf(100)))
                     .setScale(1, BigDecimal.ROUND_DOWN);
         }
@@ -274,7 +274,6 @@ public class CompoundInterestFragment extends BaseFragment {
                             compoundInterestModel.setRate(String.valueOf(yearOrMonthRate)+"%");
                         }
                         compoundInterestModelArrayList.add(compoundInterestModel);
-                        Log.d("calculateResult", "\n차수 : "+(i-1)+"\n원금 : "+principal+"\n최종원금 : "+getPrincipal(principal, rate, i) + "\n수익률 : "+yearOrMonthRate );
                     }
 
                     resultRecyclerView.setVisibility(View.VISIBLE);
