@@ -1,5 +1,6 @@
 package com.investmentkorea.android.stockcalculator;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
@@ -18,6 +19,9 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
+        startActivity(intent);
 
         ButterKnife.bind(this);
 

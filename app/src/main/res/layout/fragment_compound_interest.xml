@@ -175,7 +175,7 @@
                     android:layout_marginTop="20dp"
                     android:textSize="14dp"
                     android:textColor="@color/colorTextHintGray"
-                    android:text="* 원금의 추가 투입이 없다고 가정합니다."/>
+                    android:text="@string/compound_interest_fragment_sub_txt"/>
 
                 <Button
                     android:id="@+id/result_btn"

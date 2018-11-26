@@ -137,9 +137,15 @@ public class ProfitFragment extends BaseFragment {
                 if (!s.toString().equals(amountStr)) {
                     // 숫자에 Comma를 추가해주는 메소드 호출
                     amountStr = Util.makeStringWithComma(s.toString().replace(",",""),true);
-                    amountEditBox.setText(amountStr);
-                    Editable e = amountEditBox.getText();
-                    Selection.setSelection(e ,amountStr.length());
+                    if(amountStr.length() > 10){    // 10자리 이상으로 입력되었을 때
+                        showMessage("입력 값을 다시 확인해주세요.");
+                        amountEditBox.setText(null);
+                    }else{
+                        amountEditBox.setText(amountStr);
+                        Editable e = amountEditBox.getText();
+                        Selection.setSelection(e ,amountStr.length());
+
+                    }
                 }
             }
 
