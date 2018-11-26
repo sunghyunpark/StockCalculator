@@ -241,7 +241,7 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     추가 버튼을 누른 뒤에는 각 bottom 요소들을 초기화 해준다.
                      */
                     if(type == 0){
-                        Util.showToast(context, "매수/매도를 선택해주세요.");
+                        Util.showToast(context, "종류를 선택해주세요.");
                     }else if(amountStr.equals("")){
                         Util.showToast(context, "수량을 입력해주세요.");
                     }else if((type == 1) && (priceStr.equals(""))){

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorWhite"
     tools:context="view.ProfitFragment">
 
     <ScrollView
@@ -38,6 +39,7 @@
                         android:id="@+id/purchase_price_edit_box"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:hint="100 ~ 3,000,000"
                         android:background="@drawable/editbox_shape_gray"
                         android:textColor="@color/colorBlack"
                         android:textStyle="bold"
@@ -68,6 +70,7 @@
                         android:id="@+id/selling_price_edit_box"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:hint="100 ~ 3,000,000"
                         android:background="@drawable/editbox_shape_gray"
                         android:textColor="@color/colorBlack"
                         android:textStyle="bold"
@@ -99,6 +102,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/editbox_shape_gray"
+                        android:hint="1 ~ 10,000,000"
                         android:textColor="@color/colorBlack"
                         android:textStyle="bold"
                         android:textSize="20dp"
@@ -159,6 +163,7 @@
                         android:id="@+id/charge_edit_box"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:hint="0 ~ 1"
                         android:background="@drawable/editbox_shape_gray"
                         android:textColor="@color/colorBlack"
                         android:textStyle="bold"

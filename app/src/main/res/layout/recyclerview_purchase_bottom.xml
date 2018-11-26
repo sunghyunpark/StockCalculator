@@ -35,8 +35,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="@color/colorBlack"
-            android:layout_weight="3"
+            android:layout_weight="2.8"
             android:inputType="number"
+            android:hint="1~10,000,000"
             android:textSize="16dp"
             android:textStyle="bold"
             android:gravity="center_horizontal|center_vertical"/>
@@ -47,6 +48,7 @@
             android:layout_height="match_parent"
             android:textColor="@color/colorBlack"
             android:layout_weight="2.5"
+            android:hint="100~3,000,000"
             android:inputType="number"
             android:textSize="16dp"
             android:textStyle="bold"
