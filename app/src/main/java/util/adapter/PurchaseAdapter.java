@@ -1,6 +1,8 @@
 package util.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.Selection;
@@ -8,7 +10,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -194,8 +195,23 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     }
                     break;
                 case R.id.init_btn:
-                    purchaseAdapterListener.initData();
-                    initView();
+                    AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                    alert.setTitle("초기화");
+                    alert.setMessage("초기화 하시겠습니까?");
+                    alert.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            purchaseAdapterListener.initData();
+                            initView();
+                        }
+                    });
+                    alert.setNegativeButton("아니오",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    // Canceled.
+
+                                }
+                            });
+                    alert.show();
                     break;
                 case R.id.select_type_tv:
                     /*

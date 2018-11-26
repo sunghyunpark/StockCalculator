@@ -18,9 +18,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:textSize="14dp"
         android:textColor="@color/colorTextHintGray"
-        android:text="* 입력 후 '추가' 버튼을 눌러야 결과에 반영이 됩니다."/>
+        android:text="* 입력이 완료되면 입력 '완료버튼'을 먼저 누르신 후 '확인'버튼을 누르시면 매수단가가 나옵니다"/>
 
     <Button
         android:id="@+id/result_btn"

@@ -18,8 +18,7 @@
             android:layout_weight="3.8"
             android:textSize="16dp"
             android:textStyle="bold"
-            android:gravity="center_horizontal|center_vertical"
-            android:background="@drawable/table_shape" />
+            android:gravity="center_horizontal|center_vertical"/>
 
         <TextView
             android:id="@+id/select_type_tv"
@@ -27,7 +26,6 @@
             android:layout_height="match_parent"
             android:layout_weight="3.8"
             android:textSize="16dp"
-            android:background="@drawable/table_shape"
             android:gravity="center_vertical|center_horizontal"
             android:textColor="@color/colorBlack"
             android:text="선택"/>
@@ -41,8 +39,7 @@
             android:inputType="number"
             android:textSize="16dp"
             android:textStyle="bold"
-            android:gravity="center_horizontal|center_vertical"
-            android:background="@drawable/table_shape"/>
+            android:gravity="center_horizontal|center_vertical"/>
 
         <EditText
             android:id="@+id/price_edit_box"
@@ -53,8 +50,7 @@
             android:inputType="number"
             android:textSize="16dp"
             android:textStyle="bold"
-            android:gravity="center_horizontal|center_vertical"
-            android:background="@drawable/table_shape"/>
+            android:gravity="center_horizontal|center_vertical"/>
 
     </LinearLayout>
 
@@ -72,7 +68,7 @@
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:background="@drawable/btn_shape_primary_color"
-            android:text="추가"
+            android:text="입력완료"
             android:textSize="15dp"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
