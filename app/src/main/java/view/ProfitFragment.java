@@ -79,9 +79,14 @@ public class ProfitFragment extends BaseFragment {
                 if (!s.toString().equals(purchasePriceStr)) {
                     // 숫자에 Comma를 추가해주는 메소드 호출
                     purchasePriceStr = Util.makeStringWithComma(s.toString().replace(",",""),true);
-                    purchasePriceEditBox.setText(purchasePriceStr);
-                    Editable e = purchasePriceEditBox.getText();
-                    Selection.setSelection(e ,purchasePriceStr.length());
+                    if(purchasePriceStr.length() > 9){
+                        showMessage("입력 값을 다시 확인해주세요.");
+                        purchasePriceEditBox.setText(null);
+                    }else{
+                        purchasePriceEditBox.setText(purchasePriceStr);
+                        Editable e = purchasePriceEditBox.getText();
+                        Selection.setSelection(e ,purchasePriceStr.length());
+                    }
                 }
             }
 
@@ -103,9 +108,14 @@ public class ProfitFragment extends BaseFragment {
                 if (!s.toString().equals(sellingPriceStr)) {
                     // 숫자에 Comma를 추가해주는 메소드 호출
                     sellingPriceStr = Util.makeStringWithComma(s.toString().replace(",",""),true);
-                    sellingPriceEditBox.setText(sellingPriceStr);
-                    Editable e = sellingPriceEditBox.getText();
-                    Selection.setSelection(e ,sellingPriceStr.length());
+                    if(sellingPriceStr.length() > 9){
+                        showMessage("입력 값을 다시 확인해주세요.");
+                        sellingPriceEditBox.setText(null);
+                    }else{
+                        sellingPriceEditBox.setText(sellingPriceStr);
+                        Editable e = sellingPriceEditBox.getText();
+                        Selection.setSelection(e ,sellingPriceStr.length());
+                    }
                 }
             }
 

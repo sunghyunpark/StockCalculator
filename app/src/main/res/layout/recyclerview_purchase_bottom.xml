@@ -27,8 +27,8 @@
             android:layout_weight="4"
             android:textSize="16dp"
             android:gravity="center_vertical|center_horizontal"
-            android:textColor="@color/colorBlack"
-            android:text="선택"/>
+            android:textColor="@color/colorRed"
+            android:text="매수"/>
 
         <EditText
             android:id="@+id/amount_edit_box"

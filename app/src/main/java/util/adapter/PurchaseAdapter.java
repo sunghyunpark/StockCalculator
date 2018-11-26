@@ -77,6 +77,9 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             VHitem.priceTv.setText(format.format(currentItem.getPrice()));
 
+            /*
+            해당 item 이 매수/매도 인지 분기처리
+             */
             if(isPurchase(position)){
                 VHitem.selectTypeTv.setText("매수");
                 VHitem.selectTypeTv.setTextColor(context.getResources().getColor(R.color.colorRed));
@@ -91,6 +94,15 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             final Bottom_VH VHitem = (Bottom_VH)holder;
 
             VHitem.noTv.setText(String.valueOf(purchaseModelArrayList.size()+1));
+
+            /*
+            입력된 item 이 없는 경우에는 '매수'로만 셋팅이 되어야하므로 선택 버튼을 사용 못하도록 설정
+             */
+            if(getItemCount() == 2){
+                VHitem.selectTypeTv.setEnabled(false);
+            }else{
+                VHitem.selectTypeTv.setEnabled(true);
+            }
         }
     }
 
@@ -101,6 +113,9 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return getItem(position).getType() > 0;
     }
 
+    /*
+    선택 / 매수 / 매도 에 따라 반환값을 반환한다.
+     */
     private int getType(String typeStr){
         if(typeStr.equals("선택")){
             return 0;
@@ -164,9 +179,14 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     if (!s.toString().equals(purchasePriceStr)) {
                         // 숫자에 Comma를 추가해주는 메소드 호출
                         purchasePriceStr = Util.makeStringWithComma(s.toString().replace(",",""),true);
-                        priceEditBox.setText(purchasePriceStr);
-                        Editable e = priceEditBox.getText();
-                        Selection.setSelection(e ,purchasePriceStr.length());
+                        if(purchasePriceStr.length() > 9){    // 9자리 이상으로 입력되었을 때
+                            Util.showToast(context, "입력 값을 다시 확인해주세요.");
+                            priceEditBox.setText(null);
+                        }else {
+                            priceEditBox.setText(purchasePriceStr);
+                            Editable e = priceEditBox.getText();
+                            Selection.setSelection(e ,purchasePriceStr.length());
+                        }
                     }
                 }
 
@@ -190,10 +210,15 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     if (!s.toString().equals(amountStr)) {
                         // 숫자에 Comma를 추가해주는 메소드 호출
                         amountStr = Util.makeStringWithComma(s.toString().replace(",",""),true);
-                        amountEditBox.setText(amountStr);
-                        Editable e = amountEditBox.getText();
-                        Selection.setSelection(e ,amountStr.length());
+                        if(amountStr.length() > 10){    // 10자리 이상으로 입력되었을 때
+                            Util.showToast(context, "입력 값을 다시 확인해주세요.");
+                            amountEditBox.setText(null);
+                        }else{
+                            amountEditBox.setText(amountStr);
+                            Editable e = amountEditBox.getText();
+                            Selection.setSelection(e ,amountStr.length());
 
+                        }
                     }
                 }
 
@@ -232,6 +257,7 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                 initView();
                             }
                         }catch (NumberFormatException NFE){
+                            // 매도의 경우는 가격이 없기 때문에 예외처리한다.
                             purchaseAdapterListener.addData(getType(selectTypeTv.getText().toString()), Integer.parseInt(amountStr.replace(",", "")), 0);
                             initView();
                         }
@@ -263,6 +289,7 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     SelectPurchaseOrSellDialog selectPurchaseOrSellDialog = new SelectPurchaseOrSellDialog(context, new SelectPurchaseOrSellDialog.SelectPurchaseOrSellListener() {
                         @Override
                         public void selectPurchase(String Str) {
+                            // 매수 선택
                             selectTypeTv.setText(Str);
                             selectTypeTv.setTextColor(context.getResources().getColor(R.color.colorRed));
 
@@ -271,6 +298,7 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
                         @Override
                         public void selectSell(String Str) {
+                            // 매도 선택
                             selectTypeTv.setText(Str);
                             selectTypeTv.setTextColor(context.getResources().getColor(R.color.colorBlue));
 
@@ -284,11 +312,22 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             }
         }
 
+        /*
+        바텀 뷰를 초기화한다.
+         */
         private void initView(){
             amountEditBox.setText(null);
             priceEditBox.setText(null);
-            selectTypeTv.setText("선택");
-            selectTypeTv.setTextColor(context.getResources().getColor(R.color.colorBlack));
+            if(getItemCount() == 2){
+                // 입력된 아이템이 없는 경우 '매수'로 선택되고, 가격 EditText 는 입력 가능하게 한다.
+                selectTypeTv.setText("매수");
+                selectTypeTv.setTextColor(context.getResources().getColor(R.color.colorRed));
+                priceEditBox.setEnabled(true);
+            }else{
+                // 입력된 아이템이 있는 경우
+                selectTypeTv.setText("선택");
+                selectTypeTv.setTextColor(context.getResources().getColor(R.color.colorBlack));
+            }
             noTv.setText(String.valueOf(purchaseModelArrayList.size()+1));
         }
     }
