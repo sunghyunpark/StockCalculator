@@ -6,44 +6,56 @@
     android:background="@color/colorWhite"
     tools:context="view.PurchaseFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/purchase_recyclerView"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:layout_marginTop="10dp"/>
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textSize="14dp"
-        android:textColor="@color/colorTextHintGray"
-        android:text="@string/purchase_fragment_sub_txt"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/purchase_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginTop="10dp"/>
 
-    <Button
-        android:id="@+id/result_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:text="확인"
-        android:textSize="15dp"
-        android:textColor="@color/colorWhite"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_horizontal"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="14dp"
+            android:textColor="@color/colorTextHintGray"
+            android:text="@string/purchase_fragment_sub_txt"/>
+
+        <Button
+            android:id="@+id/result_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="확인"
+            android:textSize="15dp"
+            android:textColor="@color/colorWhite"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"/>
 
 
-    <TextView
-        android:id="@+id/result_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:textColor="@color/colorBlack"
-        android:textStyle="bold"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="10dp"
-        android:visibility="gone"/>
+        <TextView
+            android:id="@+id/result_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+    </ScrollView>
 </LinearLayout>

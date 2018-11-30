@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">스마트 주식 계산기</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-9215594321865421/6218803155</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 

@@ -100,6 +100,7 @@ public class PurchaseFragment extends BaseFragment {
             }
         });
 
+        purchaseRecyclerView.setNestedScrollingEnabled(false);
         purchaseRecyclerView.setLayoutManager(linearLayoutManager);
         purchaseRecyclerView.setAdapter(purchaseAdapter);
 
