@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import base.BaseActivity;
 import butterknife.BindView;
@@ -26,6 +27,8 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MobileAds.initialize(this, "ca-app-pub-9215594321865421~9670474337");
 
         Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
         startActivity(intent);
