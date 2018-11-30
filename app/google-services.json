@@ -1,0 +1,43 @@
+{
+  "project_info": {
+    "project_number": "314789796503",
+    "firebase_url": "https://investmentkorea-a5f20.firebaseio.com",
+    "project_id": "investmentkorea-a5f20",
+    "storage_bucket": "investmentkorea-a5f20.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314789796503:android:bec8877535fce361",
+        "android_client_info": {
+          "package_name": "com.investmentkorea.android.stockcalculator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "314789796503-bo8bhcbabesrdm2qosv1s4t3f8pjcvgt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWkpesT0FT0uzpTRJ_FkFIQzfG8Yhu_Q8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      },
+      "admob_app_id": "ca-app-pub-9215594321865421~9670474337"
+    }
+  ],
+  "configuration_version": "1"
+}
