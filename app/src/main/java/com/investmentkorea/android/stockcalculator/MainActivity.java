@@ -13,6 +13,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import util.adapter.MainViewPagerAdapter;
 
+/*
+구글 애드몹 앱 ID ca-app-pub-9215594321865421~9670474337
+ */
 public class MainActivity extends BaseActivity {
 
     @BindView(R.id.main_tab_layout) TabLayout mainTabLayout;
